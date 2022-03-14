@@ -1,10 +1,10 @@
 All documentation for the workshop is best viewed from the github.io pages
 
-[Documentation](https://ucdavis-bioinformatics-training.github.io/2021-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/)
+[Documentation](https://ucdavis-bioinformatics-training.github.io/2022-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/)
 
 Advanced Topics in Single Cell RNA-Seq Analysis: VDJ
 
-Mar. 24, 2021, 9 a.m. - 5:00 p.m **Online learning**
+Mar. 24, 2022, 9 a.m. - 5:00 p.m
 
 Contact - UC Davis Bioinformatics Core, [training.bioinformatics@ucdavis.edu](mailto:training.bioinformatics@ucdavis.edu)
 
@@ -35,4 +35,4 @@ If you have any questions, please don’t hesitate to contact us at [training.bi
 
 ### Register
 
-Register for the [course](https://registration.genomecenter.ucdavis.edu/events/vdj_march_2021/)
+Register for the [course](https://registration.genomecenter.ucdavis.edu/events/organizer/bioinformatics_core/)

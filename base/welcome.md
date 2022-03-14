@@ -72,7 +72,7 @@ Workshop materials are all posted on github, and publicly available
 
 * This VDJ workshop
 
-   [https://ucdavis-bioinformatics-training.github.io/2021-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/](https://ucdavis-bioinformatics-training.github.io/2021-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/)
+   [https://ucdavis-bioinformatics-training.github.io/2022-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/](https://ucdavis-bioinformatics-training.github.io/2022-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/)
 
 ### Computing Cluster
 
