@@ -67,25 +67,25 @@ ids <- c("Pool1")
 ```
 
 ## Sequencing metrics
-```{r, eval=FALSE}
+```{r}
 metrics <- paste(dataset_loc, ids, "metrics_summary.csv", sep = "/")
 metrics_table <- do.call("cbind", lapply(metrics, function(x) {
   as.data.frame(t(read.csv(x)))
   }))
 colnames(metrics_table) <- ids
 rownames(metrics_table) <- gsub(".", " ", rownames(metrics_table), fixed = TRUE)
-
-metrics_table[c(4:9, 1, 2, 14, 13, 10, 3, 17, 19, 11, 15, 20, 22, 24, 26, 12, 16, 21, 23, 25, 27),]  %>%
+metrics_table  %>%
   kable(caption = 'Cell Ranger Results') %>%
-  pack_rows("Sequencing Characteristics", 1, 6, label_row_css = "background-color: #666; color: #fff;") %>%
-  pack_rows("Cell Characteristics", 7, 14, label_row_css = "background-color: #666; color: #fff;") %>%
-  pack_rows("TRA", 15, 20, label_row_css = "background-color: #666; color: #fff;") %>%
-  pack_rows("TRB", 21, 26, label_row_css = "background-color: #666; color: #fff;") %>%
+  pack_rows("Overview", 1, 3, label_row_css = "background-color: #666; color: #fff;") %>%
+  pack_rows("Sequencing Characteristics", 4, 8, label_row_css = "background-color: #666; color: #fff;") %>%
+  pack_rows("Mapping Characteristics", 9, 26, label_row_css = "background-color: #666; color: #fff;") %>%
   kable_styling("striped", fixed_thead = TRUE)
 ```
 
+The majority of the following functions and figures come from [scRepertoire](https://ncborcherding.github.io/vignettes/vignette.html). We will be exploring and making changes to the code as we go, so please take notes and don't be afraid to experiment and ask questions!
+
 ## Read in Cell Ranger VDJ Data
-```{r load_data_vdj, warning=FALSE,error=FALSE, message=FALSE}
+```{r}
 clonotypes <- paste(dataset_loc, ids, "filtered_contig_annotations.csv", sep = "/")
 vdj <- combineTCR(lapply(clonotypes, read.csv),
                   samples = ids,
@@ -151,29 +151,61 @@ clonalDiversity(vdj, cloneCall = "aa", group = "samples")
 
 ## TCR clustering
 
+This is slow. I suggest skipping it for now so that you don't get stuck at this point.
 ```{r, eval=FALSE}
 tcr.clusters <- clusterTCR(vdj[[1]], chain = "TCRA", sequence = "aa", threshold = 0.9)
 ```
 
 ## Combine V(D)J and expression data
-```{r, eval=FALSE}
-experiment.aggregate <- combineExpression(vdj, experiment.aggregate, cloneCall="gene")
-head(experiment.aggregate@meta.data)
-DimPlot(experiment.aggregate, group.by = "cloneType")
 
+In the terminal, from your project directory, run `scp username@tadpole.genomecenter.ucdavis.edu:/share/workshop/vdj_workshop/R_objects/seurat_object.rds .`.
 
-## find the markers associated with the hyperexpanded clonotypes
-experiment.aggregate$cells_of_interest <- FALSE
-experiment.aggregate$cells_of_interest[grep("IGHV1", experiment.aggregate$CTstrict)] <- TRUE
-table(experiment.aggregate$cells_of_interest)
-Idents(experiment.aggregate) <- experiment.aggregate$cells_of_interest
-DimPlot(experiment.aggregate)
-FM <-FindMarkers(experiment.aggregate, ident.1 = "TRUE")
+```{r}
+library(Seurat)
+expression <- readRDS("seurat_object.rds")
+expression$barcode <- sapply(strsplit(colnames(expression), split = "-"), "[[", 1)
+expression <- RenameCells(expression, new.names = expression$barcode)
+vdj <- lapply(vdj, function (x) {
+  b = sapply(strsplit(sapply(strsplit(x$barcode, split = "_"), "[[", 3), split = "-"), "[[", 1)
+  x$barcode = b
+  x
+  })
+expression <- combineExpression(vdj, expression, cloneCall="gene")
+head(expression@meta.data)
+```
+### Find markers for "large" clones
+```{r}
+DimPlot(expression, group.by = "cloneType")
+Idents(expression) <- "cloneType"
+large.markers <-FindMarkers(expression, ident.1 = "Large (0.01 < X <= 0.1)")
+head(large.markers)
+Idents(expression) <- "orig.ident"
+```
+
+### Split V(D)J data into separate samples and re-run scRepertoire functions
+```{r}
+vdj <- expression2List(expression, group = "orig.ident")
+quantContig(vdj, cloneCall="aa", scale = FALSE)
+abundanceContig(vdj, cloneCall = "gene", scale = FALSE)
+compareClonotypes(vdj, numbers = 20, cloneCall = "aa", graph = "alluvial") +
+  guides(fill = "none") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(caption = "Results of compareClonotypes() with numbers = 20.")
+clonalHomeostasis(vdj, cloneCall = "aa") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+clonalProportion(vdj, cloneCall = "aa", split = c(10, 50, 100, 500, 1000)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+clonalOverlap(vdj, cloneCall = "gene+nt")
+clonalDiversity(vdj, cloneCall = "aa")
 ```
 
 ## Circos plots
+
+This code is under construction! If we have time, I will attempt to update this and run it.
+
 ```{r, eval=FALSE}
-circles <- getCirclize(experiment.aggregate, cloneCall = "gene+nt", groupBy = "orig.ident" )
+?getCirclize
+circles <- getCirclize(vdj, groupBy = "orig.ident" )
 
 #Just assigning the normal colors to each cluster
 grid.cols <- hue_pal()(length(unique(seurat$orig.ident)))
@@ -198,12 +230,7 @@ data_to_circlize$IGL = sapply(strsplit(data_to_circlize$CTstrict, split="_"), fu
 chordDiagram(data.frame(data_to_circlize$IGH[1:15], data_to_circlize$IGL[1:15], times = 1), annotationTrack = "grid" )
 seq.order <- get.all.sector.index()
 circos.clear()
-
-
-#Phylogenetic tree of B cell evolution
-
 ```
-
 
 ## Session Information
 ```{r}
