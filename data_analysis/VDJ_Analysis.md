@@ -602,6 +602,30 @@ clonalDiversity(vdj, cloneCall = "aa")
 
 ![](VDJ_Analysis_files/figure-html/unnamed-chunk-16-7.png)<!-- -->
 
+```r
+?clonalOverlay
+clonalOverlay(expression, reduction = "umap", freq.cutpoint = 30, bins = 10, facet = "orig.ident")
+```
+
+![](VDJ_Analysis_files/figure-html/unnamed-chunk-16-8.png)<!-- -->
+
+```r
+contig <- abundanceContig(vdj, exportTable = TRUE) %>%
+  arrange(desc(Abundance)) %>%
+  slice(5)
+contig$CTstrict
+```
+
+```
+## [1] "TRAV25.TRAJ37.TRAC_TGTGCAGGTCCCCGGGGCTCTGGCAACACAGGCAAACTAATCTTT_TRBV6-5.TRBJ1-1.None.TRBC1_TGTGCCAGCAGAAAACAGGGGGCCACTGAAGCTTTCTTT"
+```
+
+```r
+DimPlot(highlightClonotypes(expression, cloneCall = "gene+nt", sequence = "TRAV25.TRAJ37.TRAC_TGTGCAGGTCCCCGGGGCTCTGGCAACACAGGCAAACTAATCTTT_TRBV6-5.TRBJ1-1.None.TRBC1_TGTGCCAGCAGAAAACAGGGGGCCACTGAAGCTTTCTTT"), group.by = "highlight")
+```
+
+![](VDJ_Analysis_files/figure-html/unnamed-chunk-16-9.png)<!-- -->
+
 ## Circos plots
 
 This code is under construction! If we have time, I will attempt to update this and run it.

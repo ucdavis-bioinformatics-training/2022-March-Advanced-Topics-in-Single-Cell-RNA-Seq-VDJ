@@ -197,6 +197,13 @@ clonalProportion(vdj, cloneCall = "aa", split = c(10, 50, 100, 500, 1000)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 clonalOverlap(vdj, cloneCall = "gene+nt")
 clonalDiversity(vdj, cloneCall = "aa")
+?clonalOverlay
+clonalOverlay(expression, reduction = "umap", freq.cutpoint = 30, bins = 10, facet = "orig.ident")
+contig <- abundanceContig(vdj, exportTable = TRUE) %>%
+  arrange(desc(Abundance)) %>%
+  slice(5)
+contig$CTstrict
+DimPlot(highlightClonotypes(expression, cloneCall = "gene+nt", sequence = "TRAV25.TRAJ37.TRAC_TGTGCAGGTCCCCGGGGCTCTGGCAACACAGGCAAACTAATCTTT_TRBV6-5.TRBJ1-1.None.TRBC1_TGTGCCAGCAGAAAACAGGGGGCCACTGAAGCTTTCTTT"), group.by = "highlight")
 ```
 
 ## Circos plots
