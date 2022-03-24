@@ -35,13 +35,13 @@ Mysore V, Cullere X, Settles ML, Ji X, Kattan MW, Desjardins M, Durbin-Johnson B
 Log into tadpole and navigate to your directory on the /share/workshop space.
 
 ```bash
-mkdir -p /share/workshop/adv_scrnaseq/$USER
-cd /share/workshop/adv_scrnaseq/$USER
+mkdir -p /share/workshop/vdj_workshop/$USER
+cd /share/workshop/vdj_workshop/$USER
 ```
 Request an interactive session from the scheduler so that we are not competing for resources on the head node.
 
 ```bash
-srun -t 1-00:00:00 -c 4 -n 1 --mem 16000 --partition production --account workshop --reservation scranreq  --pty /bin/bash
+srun -t 1-00:00:00 -c 4 -n 1 --mem 16000 --partition production --account workshop --reservation scrnareq  --pty /bin/bash
 ```
 
 ## Project set-up
