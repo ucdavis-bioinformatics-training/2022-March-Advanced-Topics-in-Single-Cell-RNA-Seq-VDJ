@@ -36,7 +36,7 @@ navigation:
   - title: Prepare Data analysis
     url: data_analysis/vdj_prepare
   - title: Data Analysis
-    url: data_analysis/VDJ_Analysis_fixed
+    url: data_analysis/VDJ_Analysis
 
   - heading: ETC
   - title: Closing thoughts
