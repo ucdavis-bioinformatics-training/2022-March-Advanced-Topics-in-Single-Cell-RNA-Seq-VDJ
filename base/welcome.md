@@ -2,13 +2,13 @@
 
 __The mission of the Bioinformatics Core facility is to facilitate outstanding omics-scale research through these activities:__
 
- <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/misc/welcome_figure1.png" alt="welcome_figure1" width="800px"/>
+ <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2021-December-Metagenomics-and-Metatranscriptomics/master/base/welcome_figure1.png" alt="welcome_figure1" width="800px"/>
 
 ## Staff and Students
 Our team offers custom bioinformatics services to academic and private organizations. We have a strong academic background with a focus on cutting edge, open source software. We replicate standard analysis pipelines (best practices) when appropriate, and/or develop novel applications and pipelines when needed, however we always emphasize biological interpretation of the data.
 
 
- <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/ucdavis-bioinformatics-training.presentations/master/misc/staff.png" alt="staff" width="800px"/>
+ <img src="https://raw.githubusercontent.com/ucdavis-bioinformatics-training/2022-March-Single-Cell-RNA-Seq-Analysis/master/base/staff.png" alt="welcome_figure1" width="800px"/>
 
 ## Contacts
 
@@ -24,15 +24,15 @@ Our team offers custom bioinformatics services to academic and private organizat
 
    [helpdesk@genomecenter.ucdavis.edu](mailto:helpdesk@genomecenter.ucdavis.edu)
 
-## Structure of the Virtual Workshops
+## Structure of the Workshops
 
-Given the current Covid19 pandemic, and stay in place orders around the world, we've decided to take our popular bioinformatic workshops virtual. Our intent is to offer as close to an experience we can to our in-person workshops. We will hold the same goals and strive for a similar lecture/hand-on ratio. We will be using multiple technologies in order to help facilitate a maximum amount of interaction.
+Given the current Covid19 pandemic, we've decided to provide a hybrid format to our workshop. Our intent is to offer as much opportunity as possible to everyone who is interested in our workshop. We will hold the same goals and strive for a similar lecture/hand-on ratio. We will be using multiple technologies in order to help facilitate a maximum amount of interaction.
 
 #### Zoom
 
 Course lecture, discussions, and one-on-one help/troubleshooting will be conducted using a zoom meeting.
 
-  * Each participant will be provided a personal break out room that will allow one-on-one troubleshooting by our staff, screen sharing and even remote control.
+  * Participants will be provided one-on-one troubleshooting by our staff, screen sharing and even remote control when needed.
   * The Chat features of Zoom will **not** be our primary mode of text communication as its history is not reliable.
   * We will stick to a schedule to allow people to plan their day and know when they need to be back at their computers for lecture.
   * Video recordings of lectures will be made available to participants.
@@ -70,12 +70,18 @@ Workshop materials are all posted on github, and publicly available
    [https://ucdavis-bioinformatics-training.github.io/](https://ucdavis-bioinformatics-training.github.io/)
 
 
-* This VDJ workshop
+* This Intro to scRNAseq Workshop
 
    [https://ucdavis-bioinformatics-training.github.io/2022-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/](https://ucdavis-bioinformatics-training.github.io/2022-March-Advanced-Topics-in-Single-Cell-RNA-Seq-VDJ/)
 
 ### Computing Cluster
 
-A portion of  this course will be conducted on our servers and compute cluster (tadpole.genomecenter.ucdavis.edu).
+A portion of  this course will be conducted on our servers and compute cluster
 
-If you already have, or have had in the past, an account on our systems, then please tell us your username, or email, and we will add you to the workshop. **Do not create a new account**
+To get an account.  
+[https://computing.genomecenter.ucdavis.edu](https://computing.genomecenter.ucdavis.edu)
+
+Request an account -> sponsor is "Bioinformatics Core Workshop"
+
+If you already have, or have had in the past, an account on our systems, then please tell us your username, or email, and we will add you to the workshop. **Do not create a new account.**
+
